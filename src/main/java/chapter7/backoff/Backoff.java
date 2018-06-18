@@ -7,7 +7,7 @@ import java.util.Random;
  *
  * @author skywalker
  */
-class Backoff {
+public class Backoff {
 
     private final int minDelay;
     private final int maxDelay;
@@ -15,14 +15,14 @@ class Backoff {
     private int limit;
     private Random random;
 
-    Backoff(int minDelay, int maxDelay) {
+    public Backoff(int minDelay, int maxDelay) {
         this.minDelay = minDelay;
         this.maxDelay = maxDelay;
         this.limit = minDelay;
         this.random = new Random();
     }
 
-    void backoff() throws InterruptedException {
+    public void backoff() throws InterruptedException {
         int delay = random.nextInt(limit);
         limit = Math.min(maxDelay, 2 * limit);
         Thread.sleep(delay);
