@@ -23,7 +23,8 @@ public class CompositeLock {
     private final int size;
     private final QNode[] waiting;
 
-    private final AtomicStampedReference<QNode> tail = new AtomicStampedReference<>(null, 0);
+    protected final AtomicStampedReference<QNode> tail = new AtomicStampedReference<>(null, 0);
+
     private final ThreadLocal<QNode> myNode = ThreadLocal.withInitial(() -> null);
     private final Random random = new Random();
 
@@ -151,7 +152,7 @@ public class CompositeLock {
         return (System.currentTimeMillis() - start >= patience);
     }
 
-    private enum QNodeState {
+    enum QNodeState {
         /**
          * 表示可被线程申请.
          */
@@ -170,7 +171,7 @@ public class CompositeLock {
         ABORTED
     }
 
-    private class QNode {
+    class QNode {
         volatile QNode prev;
         AtomicReference<QNodeState> state = new AtomicReference<>(QNodeState.FREE);
     }
