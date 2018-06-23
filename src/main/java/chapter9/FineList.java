@@ -96,7 +96,7 @@ public class FineList<T> {
         }
     }
 
-    protected class Node<V> {
+    class Node<V> {
         V item;
         int key;
         Node<V> next;
